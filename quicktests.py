@@ -10,6 +10,25 @@ type = flap OR 3lap
 from pathlib import Path
 import json
 import yaml
+import requests as req
+
+
+# It is expected that the payload be a dictionary with the following keys:
+#
+# * userID
+# * tackSlug
+# * timeMs
+# * link
+# * notes
+# * type
+def postTime(payload):
+  url = "https://us-central1-mk64-ad77f.cloudfunctions.net/addTime"
+  headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+  # Below we are encoding the payload as form-encoded
+  # If it needs to be URL-encoded, change `data` to `params
+  req.post(url, headers=headers, data=payload)
 
 #TODO - Checks for hexmap 512
 #TODO - Convert from hex to cs, and driver info
