@@ -31,28 +31,27 @@ def postTime(payload):
   req.post(url, headers=headers, data=payload)
 
 #TODO - Checks for hexmap 512
-#TODO - Convert from hex to cs, and driver info
 #TODO - Parse into dict
 #TODO - add slug
 
 class TimeTrialData():
     course_data = [
-        {'name': 'Luigi Raceway', 'id': 0, 'offset': 0,},
-        {'name': 'Moo Moo Farm', 'id': 1, 'offset': 24,},
-        {'name': 'Koopa Troopa Beach', 'id': 2, 'offset': 48,},
-        {'name': 'Kalimari Desert', 'id': 3, 'offset': 72,},
-        {'name': 'Toad\'s Turnpike', 'id': 4, 'offset': 96,},
-        {'name': 'Frappe Snowland', 'id': 5, 'offset': 120,},
-        {'name': 'Choco Mountain', 'id': 6, 'offset': 144,},
-        {'name': 'Mario Raceway', 'id': 7, 'offset': 168,},
-        {'name': 'Wario Stadium', 'id': 8, 'offset': 192,},
-        {'name': 'Sherbet Land', 'id': 9, 'offset': 216,},
-        {'name': 'Royal Raceway', 'id': 10, 'offset': 240,},
-        {'name': 'Bowser\'s Castle', 'id': 11, 'offset': 264,},
-        {'name': 'D.K\'s Jungle Parkway', 'id': 12, 'offset': 288,},
-        {'name': 'Yoshi Valley', 'id': 13, 'offset': 312,},
-        {'name': 'Banshee Boardwalk', 'id': 14, 'offset': 336,},
-        {'name': 'Rainbow Road', 'id': 15, 'offset': 360,},
+        {'name': 'Luigi Raceway', 'id': 0, 'offset': 0, 'slug': 'luigiraceway'},
+        {'name': 'Moo Moo Farm', 'id': 1, 'offset': 24, 'slug': 'moomoofarm'},
+        {'name': 'Koopa Troopa Beach', 'id': 2, 'offset': 48, 'slug': 'koopatroopabeach'},
+        {'name': 'Kalimari Desert', 'id': 3, 'offset': 72, 'slug': 'kalimaridesert'},
+        {'name': 'Toad\'s Turnpike', 'id': 4, 'offset': 96, 'slug': 'toadsturnpike'},
+        {'name': 'Frappe Snowland', 'id': 5, 'offset': 120, 'slug': 'frappesnowland'},
+        {'name': 'Choco Mountain', 'id': 6, 'offset': 144, 'slug': 'chocomountain'},
+        {'name': 'Mario Raceway', 'id': 7, 'offset': 168, 'slug': 'marioraceway'},
+        {'name': 'Wario Stadium', 'id': 8, 'offset': 192, 'slug': 'wariostadium'},
+        {'name': 'Sherbet Land', 'id': 9, 'offset': 216, 'slug': 'sherbetland'},
+        {'name': 'Royal Raceway', 'id': 10, 'offset': 240, 'slug': 'royalraceway'},
+        {'name': 'Bowser\'s Castle', 'id': 11, 'offset': 264, 'slug': 'bowserscastle'},
+        {'name': 'D.K\'s Jungle Parkway', 'id': 12, 'offset': 288, 'slug': 'dksjungleparkway'},
+        {'name': 'Yoshi Valley', 'id': 13, 'offset': 312, 'slug': 'yoshivalley'},
+        {'name': 'Banshee Boardwalk', 'id': 14, 'offset': 336, 'slug': 'bansheeboardwalk'},
+        {'name': 'Rainbow Road', 'id': 15, 'offset': 360, 'slug': 'rainbowroad'},
     ]
 
     def __init__(self, hexmap):
@@ -70,12 +69,10 @@ class TimeTrialData():
     def buildCourseRecords(self):
         '''Build a list of all track records'''
         for course in TimeTrialData.course_data:
-            self.courseRecords.append(self.buildCourseRecord(course))
-
-    def test(self):
-        '''quick test'''
-        c = self.buildCourseRecord(TimeTrialData.course_data[1])
-        print(c)
+            dt = self.buildCourseRecord(course)
+            dt['trackSlug'] = course['slug']
+            dt['name'] = course['name']
+            self.courseRecords.append(dt)
 
 class CourseRecords():
 
@@ -134,17 +131,24 @@ class CourseRecords():
 
         #Extract time in centi-seconds (Append 0 to the end? For Gus' tool?)
         #It's oddly organized, have to untangle
-        time_bin = binlist[5]+binlist[2],binlist[3],binlist[0],binlist[1]
-        #time_ms = int(time_bin,2)
-        print(time_bin)
+        time_bin = binlist[5]+binlist[2]+binlist[3]+binlist[0]+binlist[1]
+        time_ms = int(time_bin,2)*10
 
-        return {'racer': racer, 'time_ms': time_bin}
-
+        return {'time_ms': time_ms, 'racer': racer}
 
     def fetch_data(self):
         '''Return a dictionary of readable info'''
-        pass
-        #LOOK AT ACTUAL DATA, WHAT IS THE VERBIAGE
+
+        data_dict = {
+            'record_1': self.record_1,
+            'record_2': self.record_2,
+            'record_3': self.record_3,
+            'record_4': self.record_4,
+            'record_5': self.record_5,
+            'record_lap': self.record_lap
+        }
+
+        return data_dict
 
     def __str__(self):
         '''Print course data'''
@@ -172,13 +176,9 @@ def get_hexmap(config_dict):
     '''Open .eep file, convert to hexmap'''
     #Get eep file
     eeppath = Path(config_dict['eep-path'] + config_dict['eep-file'])
-    print(eeppath)
 
-    print("EEP!")
     with open(eeppath, 'rb') as f:
         hx = f.read().hex()
-        print(hx)
-        print(type(hx))
 
     #Convert to hexmap list
     hexmap = [hx[i:i+2] for i in range(0, len(hx), 2)]
@@ -187,8 +187,8 @@ def get_hexmap(config_dict):
 if __name__ == '__main__':
     cfg = get_config('config.yml')
     hexmap = get_hexmap(cfg)
-    print(hexmap)
 
     TTD = TimeTrialData(hexmap)
-    TTD.test()
+    TTD.buildCourseRecords()
+    print(TTD.courseRecords)
 
