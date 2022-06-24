@@ -14,11 +14,11 @@ class TrackRecord():
       self.records.append({'character' : e, 
                            'time' : f * 2 ** 16 + c * 2 ** 12 + d * 2 ** 8 + a * 2 ** 4 + b})
 
-def read_directly(file):
+def read_directly(config_dict):
     '''Open .eep file'''
     #Get eep file
-    eepath = Path('/mnt/a/Emulators/P64/Save/MARIOKART64-97AC600799CF6EC717D19E5AA5DA8AE8/MARIOKART64.eep')
-    #eeppath = Path(config_dict['eep-path'] + config_dict['eep-file'])
+    #eepath = Path('/mnt/a/Emulators/P64/Save/MARIOKART64-97AC600799CF6EC717D19E5AA5DA8AE8/MARIOKART64.eep')
+    eepath = Path(config_dict['eep-path'] + config_dict['eep-file'])
     tracks = ['Luigi Raceway',
               'Moo Moo Farm',
               'Koopa Troopa Beach',
