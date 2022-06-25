@@ -5,19 +5,6 @@ from src.utils.mk64 import mk64
 from src.utils.config import get_config
 
 
-def get_hexmap(config_dict):
-    '''Open .eep file, convert to hexmap'''
-    # Get eep file
-    eeppath = Path(config_dict['eep-path'] + config_dict['eep-file'])
-
-    with open(eeppath, 'rb') as f:
-        hx = f.read().hex()
-
-    # Convert to hexmap list
-    hexmap = [hx[i:i+2] for i in range(0, len(hx), 2)]
-    return(hexmap)
-
-
 def read_directly():
     '''Open .eep file'''
     # Get eep file
