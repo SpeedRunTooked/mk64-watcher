@@ -1,0 +1,6 @@
+# Add your data below and rename this file to config.yml
+username: Tooked
+userID: -N4e6znum43hSS-QnVFi
+eep-path: C:\Program Files (x86)\Project64 3.0\Save\MARIOKART64-97AC600799CF6EC717D19E5AA5DA8AE8\
+eep-file: MARIOKART64.eep
+db-endpoint: https://us-central1-mk64-ad77f.cloudfunctions.net/addTime
