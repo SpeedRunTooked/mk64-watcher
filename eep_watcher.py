@@ -2,11 +2,8 @@
 Monitor the .eep file for changes,
 execute code when a change is detected
 '''
-import time
 from pathlib import Path
 import yaml
-
-
 
 def watch_eep():
     '''Watch the eep file for changes'''
