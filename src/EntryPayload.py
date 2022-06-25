@@ -28,7 +28,7 @@ class EntryPayload():
         self.type = type
         self.trackSlug = trackSlug
 
-    def to_json(self):
+    def to_dict(self):
         return {
             'link': self.link,
             'timeMs': self.timeMs,
