@@ -21,6 +21,7 @@ def read_directly():
 def watch_eep():
     '''Watch the eep file for changes'''
     orig = read_directly()
+    print('Watching for new records...')
 
     while True:
         time.sleep(5)
