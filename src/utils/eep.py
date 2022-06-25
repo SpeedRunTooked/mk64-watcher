@@ -1,7 +1,7 @@
 import time
 from pathlib import Path
 from src.TrackRecord import TrackRecord
-from src.utils.mk64 import mk64
+from src.utils.mk64 import compare_records, get_tracklist
 from src.utils.config import get_config
 
 
@@ -11,7 +11,7 @@ def read_directly():
     #eepath = Path(config_dict)
     cfg = get_config()
     eepath = Path(cfg['eep-path'] + cfg['eep-file'])
-    tracks = mk64.get_tracklist('names')
+    tracks = get_tracklist('names')
 
     #time_bin = binlist[5]+binlist[2],binlist[3],binlist[0],binlist[1]
     f = open(eepath, 'rb')
@@ -25,5 +25,5 @@ def watch_eep():
     while True:
         time.sleep(5)
         neep = read_directly()
-        mk64.compare_records(orig, neep)
+        compare_records(orig, neep)
         orig = neep
