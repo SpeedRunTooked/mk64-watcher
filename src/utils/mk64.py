@@ -2,7 +2,8 @@ from src.utils import uploader
 
 
 def compare_records(original, newrecords):
-    racer_ids = get_racer_ids()
+    # Commented this out because not being used atm
+    # racer_ids = get_racer_ids()
     slugs = get_tracklist('slugs')
 
     for j, (old_times, new_times) in enumerate(zip(original, newrecords)):
