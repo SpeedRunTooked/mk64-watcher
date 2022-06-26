@@ -1,3 +1,5 @@
+DEFAULT_RECORD = bytes.fromhex('C02709')
+
 TRACK_SLUGS = [
     'luigiraceway',
     'moomoofarm',
