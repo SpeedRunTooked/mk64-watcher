@@ -9,6 +9,7 @@ class TrackRecord:
             # get the current slice we're working on and see if it's the
             # default record
             if bs[i:i+3] == default_record:
+                print("Detected default time")
                 record = None
             else:
                 a = bs[i+0] >> 4
