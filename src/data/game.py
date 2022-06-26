@@ -1,3 +1,5 @@
+default_record_time = 6000000
+
 track_slugs = [
     'luigiraceway',
     'moomoofarm',
