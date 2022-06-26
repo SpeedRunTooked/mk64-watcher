@@ -1,4 +1,4 @@
-track_slugs = [
+TRACK_SLUGS = [
     'luigiraceway',
     'moomoofarm',
     'koopatroopabeach',
@@ -17,7 +17,7 @@ track_slugs = [
     'rainbowroad'
 ]
 
-racer_ids = [
+RACER_IDS = [
     'Mario',
     'Luigi',
     'Yoshi',
@@ -28,7 +28,7 @@ racer_ids = [
     ' Bowser'
 ]
 
-track_names = [
+TRACK_NAMES = [
     'Luigi Raceway',
     'Moo Moo Farm',
     'Koopa Troopa Beach',
