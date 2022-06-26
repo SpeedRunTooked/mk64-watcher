@@ -1,7 +1,12 @@
+from src.data.game import default_record
+
 class TrackRecord:
 
     def __init__(self, bs):
 
+        if bs == default_record:
+          self.records.append(None)
+          return
         self.records = []
         for i in range(0, 18, 3):
             a = bs[i+0] >> 4

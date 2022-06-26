@@ -1,3 +1,5 @@
+default_record = 0xC02709
+
 track_slugs = [
     'luigiraceway',
     'moomoofarm',
