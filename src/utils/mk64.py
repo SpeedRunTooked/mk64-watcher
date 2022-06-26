@@ -20,7 +20,7 @@ def compare_records(original, newrecords):
                 print('New top 5 race time!')
                 break
 
-        if old_times['track-record'].records[5] != new_times['track-record'].records[5]:
+        if old_times['track-record'].records[5] != new_times['track-record'].records[5] and new_times['track-record'].records[5] != None:
             # Commented these out because not being used atm
             # track_name = old_times['name']
             # racer_name = racer_ids[nr_re['character']]
