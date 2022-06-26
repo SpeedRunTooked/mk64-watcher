@@ -1,4 +1,4 @@
-from src.data.game import default_record
+from src.data.game import DEFAULT_RECORD
 
 class TrackRecord:
 
@@ -8,7 +8,7 @@ class TrackRecord:
         for i in range(0, 18, 3):
             # get the current slice we're working on and see if it's the
             # default record
-            if bs[i:i+3] == default_record:
+            if bs[i:i+3] == DEFAULT_RECORD:
                 record = None
             else:
                 a = bs[i+0] >> 4

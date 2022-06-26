@@ -3,7 +3,7 @@ from pathlib import Path
 from src.TrackRecord import TrackRecord
 from src.utils.mk64 import compare_records
 from src.utils.config import get_config
-from src.data.game import track_names
+from src.data.game import TRACK_NAMES
 
 
 def read_directly():
@@ -15,7 +15,7 @@ def read_directly():
 
     #time_bin = binlist[5]+binlist[2],binlist[3],binlist[0],binlist[1]
     f = open(eepath, 'rb')
-    return [{'name': track, 'track-record': TrackRecord(f.read(24))} for track in track_names]
+    return [{'name': track, 'track-record': TrackRecord(f.read(24))} for track in TRACK_NAMES]
 
 
 def watch_eep():
