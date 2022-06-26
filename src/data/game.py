@@ -1,4 +1,4 @@
-default_record = 0xC02709
+default_record = bytes.fromhex('C02709')
 
 track_slugs = [
     'luigiraceway',
