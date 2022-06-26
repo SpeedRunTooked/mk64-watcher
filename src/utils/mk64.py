@@ -20,10 +20,11 @@ def compare_records(original, newrecords):
                 print('New top 5 race time!')
                 break
 
-        if old_times['track-record'].records[5] != new_times['track-record'].records[5] and new_times['track-record'].records[5] != None:
+        best_lap_record = new_times['track-record'].records[5]
+        if old_times['track-record'].records[5] != best_lap_record and best_lap_record != None:
             # Commented these out because not being used atm
             # track_name = old_times['name']
             # racer_name = racer_ids[nr_re['character']]
-            new_time = new_times['track-record'].records[5]['time']
+            new_time = best_lap_record['time']
             uploader.send_to_gus(new_time, track_slugs[j], rtype='flap')
             print('New lap record!')
